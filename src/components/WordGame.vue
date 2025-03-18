@@ -234,13 +234,13 @@ function handleInput(index: number, event: Event) {
       if (isAnswerCorrect) {
         score.value++;
         showFireworks.value = true;
+        // 等待 0.3 秒後再進入下一題
         setTimeout(() => {
-          showFireworks.value = false;
           currentQuestionIndex.value++;
           if (!isGameComplete.value) {
             getNextWord();
           }
-        }, 2000);
+        }, 300);
       } else {
         setTimeout(() => {
           clearInputs();

@@ -50,6 +50,9 @@ function launchFireworks() {
               fireworks.value.push(createFirework());
             }, j * 100);
           }
+          setTimeout(() => {
+            props.show = false;
+          }, 2000);
         }, 500);
       }
     }, i * 150);
