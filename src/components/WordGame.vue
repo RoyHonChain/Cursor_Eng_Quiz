@@ -233,7 +233,11 @@ function handleInput(index: number, event: Event) {
       isCorrect.value = isAnswerCorrect;
       if (isAnswerCorrect) {
         score.value++;
-        showFireworks.value = true;
+        // 先關閉煙火，然後立即重新觸發
+        showFireworks.value = false;
+        nextTick(() => {
+          showFireworks.value = true;
+        });
         // 等待 0.3 秒後再進入下一題
         setTimeout(() => {
           currentQuestionIndex.value++;

@@ -24,7 +24,7 @@ function createFirework() {
   const x = Math.random() * 100;
   const y = Math.random() * 100;
   const size = 15 + Math.random() * 25;
-  const duration = 0.8 + Math.random() * 0.7;
+  const duration = 0.5 + Math.random() * 0.6;
   const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
 
   return {
@@ -40,27 +40,30 @@ function createFirework() {
 
 function launchFireworks() {
   fireworks.value = [];
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 15; i++) {
     setTimeout(() => {
       fireworks.value.push(createFirework());
-      if (i === 24) {
+      if (i === 14) {
         setTimeout(() => {
-          for (let j = 0; j < 20; j++) {
+          for (let j = 0; j < 10; j++) {
             setTimeout(() => {
               fireworks.value.push(createFirework());
-            }, j * 100);
+            }, j * 50);
           }
           setTimeout(() => {
-            props.show = false;
-          }, 2000);
-        }, 500);
+            if (props.show) {
+              props.show = false;
+            }
+          }, 600);
+        }, 200);
       }
-    }, i * 150);
+    }, i * 80);
   }
 }
 
 watch(() => props.show, (newValue) => {
   if (newValue) {
+    fireworks.value = [];
     launchFireworks();
   }
 });
